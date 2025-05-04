@@ -11,9 +11,9 @@ vim.cmd("set number")
 -- SHORTCUTS
 
 vim.keymap.set("n", "<leader>i", function()
-  local save_cursor = vim.api.nvim_win_get_cursor(0) -- save {line, col}
-  vim.cmd("normal! gg=G") -- indent entire file
-  vim.api.nvim_win_set_cursor(0, save_cursor) -- restore position
+	local save_cursor = vim.api.nvim_win_get_cursor(0) -- save {line, col}
+	vim.cmd("normal! gg=G") -- indent entire file
+	vim.api.nvim_win_set_cursor(0, save_cursor) -- restore position
 end, { desc = "Indent entire file", silent = true })
 
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
@@ -23,3 +23,20 @@ vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
 
 vim.keymap.set("n", "<C-\\>", "<C-w>p", { desc = "Switch to previous window" })
 
+vim.keymap.set("n", "<leader>v", ":vsplit<CR>", {
+	noremap = true,
+	silent = true,
+	desc = "Vertical Split",
+})
+
+vim.keymap.set("n", "<leader>.", ":vertical resize +5<CR>", {
+	noremap = true,
+	silent = true,
+	desc = "Increase Width",
+})
+
+vim.keymap.set("n", "<leader>,", ":vertical resize -5<CR>", {
+	noremap = true,
+	silent = true,
+	desc = "Decrease Width",
+})
