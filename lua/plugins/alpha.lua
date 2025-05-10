@@ -22,6 +22,7 @@ __/\\\\\_____/\\\_______________________________/\\\________/\\\________________
     dashboard.section.buttons.val = {
       dashboard.button("f", " " .. " Find file", "<cmd> Telescope find_files <cr>"),
       dashboard.button("l", "󰒲 " .. " Lazy", "<cmd> Lazy <cr>"),
+      dashboard.button("s", "" .. " Sessions", "<cmd> Telescope persisted<cr>"),
       dashboard.button("q", " " .. " Quit", "<cmd> qa <cr>"),
     }
     for _, button in ipairs(dashboard.section.buttons.val) do
