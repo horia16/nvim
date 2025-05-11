@@ -4,6 +4,7 @@ return {
   opts = {
   },
   config = function ()
+    vim.opt.sessionoptions:append("curdir")
     require("persisted").setup({
       autosave = true,
       autoload = true,

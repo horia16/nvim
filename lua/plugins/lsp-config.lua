@@ -35,14 +35,21 @@ return {
         capabilities = capabilities,
       })
 
-      lspconfig.astro.setup({
-        capabilities = capabilities,
-        init_options = {
-          typescript = {
-            tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib",
-          },
-        },
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "PersistedLoadPost",
+        callback = function()
+
+          lspconfig.astro.setup({
+            capabilities = capabilities,
+            init_options = {
+              typescript = {
+                tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib",
+              },
+            },
+          })
+        end,
       })
+
 
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
