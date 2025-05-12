@@ -26,6 +26,7 @@ return {
 
       lspconfig.ts_ls.setup({
         capabilities = capabilities,
+        filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
       })
 
       lspconfig.solargraph.setup({
