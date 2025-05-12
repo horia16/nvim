@@ -49,3 +49,19 @@ vim.api.nvim_create_user_command("SmartQuit", function()
   -- Write all and quit
   vim.cmd("wqa")
 end, {})
+
+-- Smart case-sensitive searching
+vim.o.ignorecase = true       -- Ignore case by default
+vim.o.smartcase = true        -- But make it case-sensitive if the search contains uppercase
+
+-- Clear search highlights when pressing <Esc>
+vim.keymap.set('n', '<Esc>', function()
+  if vim.v.hlsearch == 1 then
+    vim.cmd('nohlsearch')
+    vim.fn.setreg('/', '')
+  else
+    -- send actual <Esc> key
+    return '<Esc>'
+  end
+end, { expr = true, noremap = true, silent = true, desc = 'Clear search highlight or escape' })
+
