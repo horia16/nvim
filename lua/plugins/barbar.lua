@@ -9,10 +9,13 @@ return {
   end,
   config = function()
     require("barbar").setup({
-      animation = false,
+      animation = true,
       auto_hide = false,
       tabpages = true,
       clickable = true,
+      icons = {
+        buffer_index= true,
+      }
     })
     local map = vim.keymap.set
     local opts = { noremap = true, silent = true }

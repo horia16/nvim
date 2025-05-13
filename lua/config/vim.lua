@@ -11,10 +11,14 @@ vim.cmd("set number")
 -- SHORTCUTS
 
 vim.keymap.set("n", "<leader>i", function()
-  local save_cursor = vim.api.nvim_win_get_cursor(0) -- save {line, col}
-  vim.cmd("normal! gg=G") -- indent entire file
-  vim.api.nvim_win_set_cursor(0, save_cursor) -- restore position
-end, { desc = "Indent entire file", silent = true })
+	vim.lsp.buf.format({ async = true })
+end, { desc = "Format entire file via LSP", silent = true })
+
+vim.keymap.set("n", "<leader>I", function()
+	local save_cursor = vim.api.nvim_win_get_cursor(0)
+	vim.cmd("normal! gg=G")
+	vim.api.nvim_win_set_cursor(0, save_cursor)
+end, { desc = "Indent via Vim", silent = true })
 
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to below window" })
@@ -24,46 +28,46 @@ vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
 vim.keymap.set("n", "<C-\\>", "<C-w>p", { desc = "Switch to previous window" })
 
 vim.keymap.set("n", "<leader>v", ":vsplit<CR>", {
-  noremap = true,
-  silent = true,
-  desc = "Vertical Split",
+	noremap = true,
+	silent = true,
+	desc = "Vertical Split",
 })
 
 vim.keymap.set("n", "<leader>.", ":vertical resize +5<CR>", {
-  noremap = true,
-  silent = true,
-  desc = "Increase Width",
+	noremap = true,
+	silent = true,
+	desc = "Increase Width",
 })
 
 vim.keymap.set("n", "<leader>,", ":vertical resize -5<CR>", {
-  noremap = true,
-  silent = true,
-  desc = "Decrease Width",
+	noremap = true,
+	silent = true,
+	desc = "Decrease Width",
 })
 
 vim.api.nvim_create_user_command("SmartQuit", function()
-  -- Close Neo-tree filesystem
-  vim.cmd("Neotree filesystem close")
-  -- Save session
-  vim.cmd("SessionSave")
-  -- Write all and quit
-  vim.cmd("wqa")
+	-- Close Neo-tree filesystem
+	vim.cmd("Neotree filesystem close")
+	-- Save session
+	vim.cmd("SessionSave")
+	-- Write all and quit
+	vim.cmd("wqa")
 end, {})
 
 -- Smart case-sensitive searching
-vim.o.ignorecase = true       -- Ignore case by default
-vim.o.smartcase = true        -- But make it case-sensitive if the search contains uppercase
+vim.o.ignorecase = true -- Ignore case by default
+vim.o.smartcase = true -- But make it case-sensitive if the search contains uppercase
 
 -- Clear search highlights when pressing <Esc>
-vim.keymap.set('n', '<Esc>', function()
-  if vim.v.hlsearch == 1 then
-    vim.cmd('nohlsearch')
-    vim.fn.setreg('/', '')
-  else
-    -- send actual <Esc> key
-    return '<Esc>'
-  end
-end, { expr = true, noremap = true, silent = true, desc = 'Clear search highlight or escape' })
+vim.keymap.set("n", "<Esc>", function()
+	if vim.v.hlsearch == 1 then
+		vim.cmd("nohlsearch")
+		vim.fn.setreg("/", "")
+	else
+		-- send actual <Esc> key
+		return "<Esc>"
+	end
+end, { expr = true, noremap = true, silent = true, desc = "Clear search highlight or escape" })
 
 -- Visual mode indentation with Tab and Shift-Tab
 vim.keymap.set("v", "<Tab>", ">gv", { desc = "Indent right and reselect" })
