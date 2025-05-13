@@ -65,3 +65,6 @@ vim.keymap.set('n', '<Esc>', function()
   end
 end, { expr = true, noremap = true, silent = true, desc = 'Clear search highlight or escape' })
 
+-- Visual mode indentation with Tab and Shift-Tab
+vim.keymap.set("v", "<Tab>", ">gv", { desc = "Indent right and reselect" })
+vim.keymap.set("v", "<S-Tab>", "<gv", { desc = "Indent left and reselect" })
