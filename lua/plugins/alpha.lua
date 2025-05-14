@@ -24,6 +24,8 @@ return {
     dashboard.section.buttons.val = {
       dashboard.button("f", " " .. " Find file", "<cmd> Telescope find_files <cr>"),
       dashboard.button("l", "󰒲 " .. " Lazy", "<cmd> Lazy <cr>"),
+      dashboard.button("u", "󱐥  Update plugins", "<cmd>Lazy sync<CR>"),
+      dashboard.button("t", "  Install language tools", "<cmd>Mason<CR>"),
       dashboard.button("s", "" .. " Sessions", "<cmd> Telescope persisted<cr>"),
       dashboard.button("q", " " .. " Quit", "<cmd> qa <cr>"),
     }

@@ -1,12 +1,24 @@
 -- SET LEADER BEFORE ANYTHING ELSE
 vim.g.mapleader = " "
+local opt = vim.opt
 
--- BASIC OPTIONS
-vim.cmd("set expandtab")
-vim.cmd("set tabstop=2")
-vim.cmd("set softtabstop=2")
-vim.cmd("set shiftwidth=2")
 vim.cmd("set number")
+
+-- Text layout
+opt.tabstop = 2         -- A tab character (`\t`) appears as 2 spaces
+opt.shiftwidth = 2      -- Indent lines with 2 spaces (e.g. with >>)
+opt.softtabstop = 2     -- Pressing <Tab> inserts 2 spaces (feels like a tab)
+opt.expandtab = true    -- Convert tabs to spaces (no literal `\t` characters)
+
+opt.wrap = false        -- Don't wrap long lines (let them overflow)
+
+opt.list = true         -- Show invisible characters (trailing spaces, tabs, etc.)
+opt.listchars = {
+  trail = "•",          -- Show trailing spaces as •
+  nbsp = "␣",           -- Show non-breaking spaces as ␣
+  tab = "» "            -- Show tab characters as » followed by a space
+}
+
 
 -- SHORTCUTS
 
@@ -45,7 +57,7 @@ vim.keymap.set("n", "<leader>,", ":vertical resize -5<CR>", {
   desc = "Decrease Width",
 })
 
-vim.api.nvim_create_user_command("SmartQuit", function()
+vim.api.nvim_create_user_command("Squit", function()
   -- Close Neo-tree filesystem
   vim.cmd("Neotree filesystem close")
   -- Save session
@@ -57,6 +69,11 @@ end, {})
 -- Smart case-sensitive searching
 vim.o.ignorecase = true -- Ignore case by default
 vim.o.smartcase = true  -- But make it case-sensitive if the search contains uppercase
+
+-- File management
+opt.backup = false      -- Don't create backup files
+opt.swapfile = false    -- Don't use swap files
+opt.undofile = true     -- Enable persistent undo (save undo history across sessions)
 
 -- Clear search highlights when pressing <Esc>
 vim.keymap.set("n", "<Esc>", function()
@@ -73,6 +90,10 @@ end, { expr = true, noremap = true, silent = true, desc = "Clear search highligh
 vim.keymap.set("v", "<Tab>", ">gv", { desc = "Indent right and reselect" })
 vim.keymap.set("v", "<S-Tab>", "<gv", { desc = "Indent left and reselect" })
 
+-- Clipboard stuff
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank to OS clipboard" })
+
+-- Copy the path to OS clipboard
 vim.api.nvim_create_user_command("CopyPath", function(context)
   local full_path = vim.fn.glob("%:p")
 
