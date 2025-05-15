@@ -46,7 +46,7 @@ return {
       sources = {
         null_ls.builtins.formatting.stylua,
         null_ls.builtins.formatting.prettierd.with({
-          filetypes = { "javascript", "typescript", "astro", "json", "css", "html" },
+          filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "astro", "json", "css", "html" },
         }),
         null_ls.builtins.completion.spell,
         require("none-ls.diagnostics.eslint_d").with({
