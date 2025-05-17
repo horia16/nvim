@@ -129,3 +129,15 @@ end, {
     return { "nameonly", "relative", "absolute" }
   end,
 })
+-- Disable mouse
+vim.opt.mouse = ""
+-- Disable arrow keys
+local opts = { noremap = true, silent = true }
+local keymap = vim.keymap.set
+
+-- Disable arrow keys in normal, insert, and visual modes
+local modes = { 'n', 'i', 'v' }
+keymap(modes, '<Up>', '<Nop>', opts)
+keymap(modes, '<Down>', '<Nop>', opts)
+keymap(modes, '<Left>', '<Nop>', opts)
+keymap(modes, '<Right>', '<Nop>', opts)
