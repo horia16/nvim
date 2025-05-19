@@ -31,6 +31,10 @@ return {
       lspconfig.ts_ls.setup({
         capabilities = capabilities,
         filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+        on_attach = function(client)
+          client.server_capabilities.documentFormattingProvider = false
+          client.server_capabilities.documentRangeFormattingProvider = false
+        end,
       })
 
       lspconfig.solargraph.setup({
@@ -45,7 +49,6 @@ return {
       vim.api.nvim_create_autocmd("User", {
         pattern = "PersistedLoadPost",
         callback = function()
-
           lspconfig.astro.setup({
             capabilities = capabilities,
             init_options = {
